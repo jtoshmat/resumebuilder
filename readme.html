@@ -1,0 +1,497 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<head lang="en">
+	<meta http-equiv="content-type" content="text/html;charset=utf-8">
+	<title>Drag N' Drop Form-builder Documentation Template</title>
+	<!-- Framework CSS -->
+	<link rel="stylesheet" href="assets/blueprint-css/screen.css" type="text/css" media="screen, projection">
+	<link rel="stylesheet" href="assets/blueprint-css/print.css" type="text/css" media="print">
+	<!--[if lt IE 8]><link rel="stylesheet" href="assets/blueprint-css/ie.css" type="text/css" media="screen, projection"><![endif]-->
+	<link rel="stylesheet" href="assets/blueprint-css/plugins/fancy-type/screen.css" type="text/css" media="screen, projection">
+	<style type="text/css" media="screen">
+		p, table, hr, .box { margin-bottom:25px; }
+		.box p { margin-bottom:10px; }
+	</style>
+</head>
+
+
+<body>
+	<div class="container">
+		<h3 class="center alt">&nbsp;</h3>
+        <h3 class="center alt">&ldquo;PHP Drag N' Drop Form-builder&rdquo; Documentation by &ldquo;Eminence Digital&rdquo; v1.0</h3>
+		
+		<hr>
+		
+		<h1 class="center">&ldquo;PHP Drag N' Drop form-builder&rdquo;</h1>
+		
+		<div class="borderTop">
+			<div class="span-6 colborder info prepend-1">
+				<p class="prepend-top">
+					<strong>
+					Created: 3/1/2015<br>
+					By: Eminence Digital<br>
+					Email: <a href="mailto:eminencedigitalweb@gmail.com">eminencedigitalweb@gmail.com</a>
+					</strong>
+				</p>
+			</div><!-- end div .span-6 -->		
+	
+			<div class="span-12 last">
+				<p class="prepend-top append-0">Thank you for purchasing this plug-in. If you have any questions that are beyond the scope of this help file, please feel free to email via my user page contact form <a href="http://themeforest.net/user/zeeside">here</a>. Thanks so much!</p>
+			</div>
+		</div><!-- end div .borderTop -->
+		
+		<hr>
+		
+		<h2 id="toc" class="alt">Table of Contents</h2>
+		<ol class="alpha">
+			<li><a href="#featuresummary">Feature Summary</a></li>
+            <li><a href="#techsummary">Technical Summary & Pre-requisites</a></li>
+			<li><a href="#applicationstructure">Application Structure</a></li>
+			<li><a href="#integration">How to integrate form-builder into your application</a>
+               <ol>
+                  <li><a href="#dbinstall">Installing the database tables</a></li>			
+                  <li><a href="#copyoverfiles">Copying over application files</a></li>		
+                  <li><a href="#updatingconfigs">Updating configurations</a></li>		
+                   <li><a href="#configsettingbreakdown">Configuration settings breakdown</a>
+                       <ol>
+                           <a href="#databasesettings">Database Settings</a>
+                           <a href="#fileuploadsettings">File Upload Settings</a>
+                           <a href="#emailconfiguration">Email Configuration</a>
+                       </ol>
+                   </li>	
+               </ol>
+            </li>	
+            <li><a href="#themes">How to manage Themes for your forms</a></li>            
+			<li><a href="#templates">How to update templates</a></li>            
+            <li><a href="#upgrade">How to upgrade from version 1.0 to version 2.0</a></li>            			
+            <li><a href="#faq">FAQ</a>
+               <ol>
+                 <li><a href="#creation">How do I create a form?</a></li>			
+                 <li><a href="#rename">How do I rename a form?</a></li>			
+                 <li><a href="#editdropdown">How do I edit a drop-down list field?</a></li>			
+                 <li><a href="#delete">Can I delete a form?</a></li>	
+                 <li><a href="#fillform">How do I fill-out a form?</a></li>	
+                 <li><a href="#excel">How do I export registration data to excel?</a></li>			                                  		
+                 <li><a href="#faqthemes">How do I manage themes for my forms?</a></li>
+                 <li><a href="#emailsettings">How do I manage notification email settings?</a></li>
+                 <li><a href="#managefiles">How do I manage where the file-upload control stores uploaded files?</a></li>
+               </ol>
+            </li>	            
+		</ol>		
+		<hr>		
+		<h3 id="featuresummary"><strong>A) Feature Summary</strong> - <a href="#toc">top</a></h3>
+        <img src="assets/images/form-screenshot-1.png" alt="HTML Structure" />
+        <p>The Drag N' Drop form builder was first written in the .Net framework and then ported over to PHP after 
+            popular demand. It provides a lightweight and user-friendly tool for creating almost infinite configurations for end-user forms.
+        Using the simplicity of drag-and-drop and user experience patterns available in most integrated development environments, you can customize forms in several ways.
+        Below are some of the features available:</p>
+        <h4>Feature List</h4>
+		<ol>           
+          <li>Choose from 17 different draggable fields to create your form</li>
+          <li>Combination fields (fields consisting of one or more fields combined eg. Address)</li>
+          <li>Customize required field validation</li>
+          <li>Add tooltips as a help-resource</li>
+          <li>Easy to populate drop-down-lists (simply type comma separated list)</li>
+          <li>Real-time updating</li>
+          <li>Combination fields - made up of several fields in one eg. Address Field</li>
+          <li>Autosave - background save process triggers intermittently as you create your form</li>
+          <li>Export registrant list to excel spreadsheet</li>
+        </ol>		
+
+		<hr/>
+		
+		<h3 id="techsummary"><strong>C) Technical Summary &amp; Pre-requisites</strong> - <a href="#toc">top</a></h3>
+		
+		<p>This version of the Drag N' Drop form-builder is built the PHP/MySQL stack. The project comes with scripts that you can 
+            use to create the necessary tables in a MySQL database. To upgrade from an older version see the 
+			<a href="#upgrade">upgrade section</a> below.
+            </p>
+            To successfully integrate the form-builder into your application with optimal results you will need:
+            <ol>
+              <li>PHP Version 5.4.23</li>
+              <li>MySQL Community Server (GPL) - version: 5.5.34<span class="quiet">*</span></li>
+              <li>phpMyAdmin (or your preferred user interface for MySql)</li>
+              <li>JQuery 1.7.1</li>
+              
+            </ol>
+		<hr/>
+		
+		<h3 id="applicationstructure"><strong>D) Application Structure</strong> - <a href="#toc">top</a></h3>		
+		<p>The form-builder comes with a PHP project containing the following essential components:</p>
+		
+			<ol>
+				<li>Database Scripts</li>
+                <li>Server Side Objects (located in \lib folder)
+                   <ol>
+                      <li>Repository Classes & Business Objects</li>                           
+                      <li>View Models</li>
+                      <li>Helpers</li>
+                   </ol>
+                </li>
+                <li>Front-end assets
+                  <ol>
+                     <li>Views</li>
+                     <li>Javascript files</li>
+                     <li>Stylesheets</li>
+                     <li>Images</li>
+                  </ol>
+                </li>
+			</ol>
+		<hr />
+		
+		<h3 id="integration"><strong>E) How to integrate form-builder into your application</strong> - <a href="#toc">top</a></h3>
+		
+		<p>
+       You can, install the form-builder into your existing PHP project by running the SQL scripts that create the application's tables against an existing database 
+            instance and copying over the files that make up the rest of the application 
+		</p>
+        <h4 id="dbinstall">Install the database tables</h4>
+        <p>
+          From your instance of phpMyAdmin open the SQL panel, locate the file:<br />
+            <ul>
+                <li><i>...\FormBuilder\db\1-create-tables.sql<small>*</small></i></li>
+            </ul>
+			<small>See the upgrade section below on how to upgrade from an older version.</small>
+             Copy the contents to the text area of the SQL panel and run the queries. After this operation, the following tables should be created.<br />
+            <img src="assets/images/table-structure.png" alt="HTML Structure" />
+        </p>        
+        <h4 id="copyoverfiles">Copy Over Application Files</h4>
+        <p>        
+        You must copy all the folders in the application folder into your project. If you have existing folders, you will have to merge the contents of those folders with the contents of the 
+            form builder's folders. If you are an experienced developer you may change the location of files in the project, but note that you will have to look for and change all references to those files 
+            within the application.
+                
+        </p>
+
+        <h4 id="updatingconfigs">Updating configurations</h4>
+        Configurations for the application can be found in the file: <br /><br />
+        <i>/lib/forms-settings.php</i><br /><br />
+        
+        <h4 id="#configsettingbreakdown">Configuration settings breakdown</h4>
+        <h3 id="databasesettings">Database Settings</h3>
+        Note: your application will not be ready to run until you setup your database and database settings properly. The settings or the database are as follows:
+         <table>
+          <thead>
+            <tr>
+              <th>Setting</th>
+              <th>Function</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="span-7">HOST</td>
+              <td>The hostname for your database
+              </td>
+            </tr>
+            <tr>
+              <td class="span-7">DB_NAME</td>
+              <td>The name for your database</td>
+            </tr>
+            <tr>
+              <td class="span-7">DB_USERNAME</td>
+              <td>The username for your database</td>
+            </tr>
+            <tr>
+              <td class="span-7">DB_PASSWORD</td>
+              <td>The password for your database </td>
+            </tr>            
+          </tbody>
+        </table>
+        <h3 id="fileuploadsettings">File Upload Settings</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Setting</th>
+              <th>Function</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+                <td class="span-7">
+                    FILE_SAVE_PATH
+                </td>
+                <td>
+                    This is the path where files uploaded via your forms will be stored
+                </td>
+            </tr>
+              <tr>
+                  <td class="span-7">DEFAULT_FILE_EXTENSIONS</td>
+                  <td>
+                      The file extensions you want to support by default for the upload feature
+                  </td>
+              </tr>
+              <tr>
+                  <td class="span-7">DEFAULT_MAX_FILE_SIZE_IN_KB</td>
+                  <td>
+                      The default maximum file size you want to support for file uploads
+                  </td>
+              </tr>
+              <tr>
+                  <td class="span-7">
+                      DEFAULT_MIN_FILE_SIZE_IN_KB
+                  </td>
+                  <td>
+                      The default minimum file size you want to support for file uploads
+                  </td>
+              </tr>
+            <tr>
+              <td class="span-7">USE_CLOUD_STORAGE</td>
+              <td>Set to true to upload files to amazon cloud, set to false to store files in local storage
+              </td>
+            </tr>
+            
+            <tr>
+              <td class="span-7">AWS_ACCESS_KEY</td>
+              <td>Your amazon S3 access key.</td>
+            </tr>
+            <tr>
+              <td class="span-7">AWS_SECRET_KEY</td>
+              <td>Your amazon S3 secret key. </td>
+            </tr>
+            <tr>
+              <td class="span-7">AWS_BUCKET</td>
+              <td>The S3 bucket in which uploads will be stored</td>
+            </tr>
+          </table>
+        <h3>Email Configuration</h3>  
+        <table>
+            <thead>
+            <tr>
+              <th>Setting</th>
+              <th>Function</th>
+            </tr>
+          </thead>
+          <tbody>
+              <tr>
+                  <td class="span-7">ENABLE_NOTIFICATION</td>
+                  <td>Set to true to enable notifications when forms are submitted</td>
+              </tr>
+            <tr>
+              <td class="span-7">SENDER_EMAIL</td>
+              <td>Sender email to use when sending notifications</td>
+            </tr>
+            <tr>
+              <td class="span-7">SENDER_NAME</td>
+              <td>Sender name to use when sending notifications</td>
+            </tr>
+            <tr>
+              <td class="span-7">EMAIL_HOST</td>
+              <td>Email host to use when sending notifications </td>
+            </tr>
+            <tr>
+              <td class="span-7">EMAIL_PORT</td>
+              <td>Email port to use when sending notifications</td>
+            </tr>
+            <tr>
+              <td class="span-7">EMAIL_PASSWORD</td>
+              <td>Email password to use when sending notifications</td>
+            </tr>
+            <tr>
+              <td class="span-7">EMAIL_USERNAME</td>
+              <td>Email username to use when sending notifications</td>
+            </tr>
+            <tr>
+              <td class="span-7">EMAIL_ENABLE_SSL</td>
+              <td>Set to true to enable ssl when sending notifications else set to false</td>
+            </tr>
+          </tbody>
+        </table>
+		
+		<h3 id="fileuploadsettings">File Upload Settings</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Setting</th>
+              <th>Function</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+                <td class="span-7">
+                    FILE_SAVE_PATH
+                </td>
+                <td>
+                    This is the path where files uploaded via your forms will be stored
+                </td>
+            </tr>
+              <tr>
+                  <td class="span-7">DEFAULT_FILE_EXTENSIONS</td>
+                  <td>
+                      The file extensions you want to support by default for the upload feature
+                  </td>
+              </tr>
+              <tr>
+                  <td class="span-7">DEFAULT_MAX_FILE_SIZE_IN_KB</td>
+                  <td>
+                      The default maximum file size you want to support for file uploads
+                  </td>
+              </tr>
+              <tr>
+                  <td class="span-7">
+                      DEFAULT_MIN_FILE_SIZE_IN_KB
+                  </td>
+                  <td>
+                      The default minimum file size you want to support for file uploads
+                  </td>
+              </tr>
+            <tr>
+              <td class="span-7">USE_CLOUD_STORAGE</td>
+              <td>Set to true to upload files to amazon cloud, set to false to store files in local storage
+              </td>
+            </tr>
+            
+            <tr>
+              <td class="span-7">AWS_ACCESS_KEY</td>
+              <td>Your amazon S3 access key.</td>
+            </tr>
+            <tr>
+              <td class="span-7">AWS_SECRET_KEY</td>
+              <td>Your amazon S3 secret key. </td>
+            </tr>
+            <tr>
+              <td class="span-7">AWS_BUCKET</td>
+              <td>The S3 bucket in which uploads will be stored</td>
+            </tr>
+          </table>
+		  
+        <h3>Recaptcha Configuration</h3>  
+        <table>
+            <thead>
+            <tr>
+              <th>Setting</th>
+              <th>Function</th>
+            </tr>
+          </thead>
+          <tbody>
+              <tr>
+                  <td class="span-7">RECAPTCHA_KEY</td>
+                  <td>Set to true to enable notifications when forms are submitted</td>
+              </tr>
+            <tr>
+              <td class="span-7">RECAPTCHA_SECRET</td>
+              <td>Sender email to use when sending notifications</td>
+            </tr>
+            <tr>
+              <td class="span-7">RECAPTCHA_LANG</td>
+              <td>Sender name to use when sending notifications</td>
+            </tr>
+            <tr>
+              <td class="span-7">RECAPTCHA_THEME</td>
+              <td>Email host to use when sending notifications </td>
+            </tr>
+            
+          </tbody>
+        </table>
+
+        <hr/>
+        <h3 id="themes">How to manage Themes for your forms</h3>
+        
+        <p>
+            The form-builder allows you to customize the look-and-feel of the forms you create. All styles that 
+           control the look and feel of forms are stored in the path:<br /><br />
+           <i>\Content\css\form-builder\themes</i><br /><br />
+           To create a new theme, simply create a new directory within that folder and place a "style.css" document within it.
+           You can use an existing theme's style.css file to guide you in creating your themes.
+        </p>
+
+		<h3 id="templates">How to update templates</h3>        
+        <p>
+            Templates are preset forms that you can use as a starting-step to create your own forms. They save you some work by having the fields needed for 
+			certain forms already added. Once installed, you can create forms from templates by selecting the template from the dropdownlist on the form listings page 
+			and clicking "Add Form".
+			<br/><br/>
+			To install templates, you must have template files (json files in the "template-files"" folder of your root directory) installed. You should see an 
+			"Update Templates" button on the form listing page. If not, check the setting "SHOW_UPDATE_TEMPLATES_BUTTON" and make sure it's set to true. Once visible, 
+			you can click on the "Update Templates" button and all available templates will be read from the template-files folder and imported into your database. 
+			<br/><br/>
+			Behind the scenes, templates work just like forms with a special setting to mark them as templates. You can manage your templates like you do regular forms by setting the 
+			setting "SHOW_TEMPLATES_IN_LIST" to true. You can also turn some of your own forms into templates with this setting as it reveals a checkbox 
+			that allows you to check/uncheck which forms can be made into templates. 
+			
+        </p>
+
+		<h3 id="upgrade">Upgrade</h3>
+       
+        <p>
+        To upgrade from a previous version, locate the db folder from the root of the application and navigate to the folder with the versions you are trying to 
+		upgrade from and to. The folder name will be in the format<br/><br/>
+		<i>"upgrade-from-version-{base-version}-to-{upgrade-version}"</i>
+		<br><br/>
+		So for example, to upgrade from version 1 to 2, you will need to locate the "upgrade-from-version-1-to-2" folder. From the upgrade folder, locate a sql file 
+		of the same name, and run it against your base version database in MySql
+        </p>
+		
+        <h3 id="faq">FAQ</h3>
+       
+        <p>
+        <span id="creation"><strong>How do I create a form?</strong></span><br />
+        To create a form, go to the index page of your form builder, and click on "Add Form"        
+        </p>
+
+        <p>
+        <span id="rename"><strong>How do I rename a form?</strong></span><br />
+        To rename a form, select a form from the index page. While in the form's edit mode, you can click on the form's title label and edit the form's  name in place
+         or in the edit panel, edit the "Title" property and hit enter
+        </p>
+
+        <p>
+        <span id="editdropdown"><strong>How do I edit a drop-down list field?</strong></span><br />
+        Drop-down-lists are populated by comma-delimited lists in the edit pane. The first item in the list is usually selected by default unless you specify the 
+        <i>"Selected Option"</i> field
+        </p>
+
+        <p>
+        <span id="delete"><strong>How do I delete a form?</strong></span><br />
+        You can only delete a form if there are no form submissions. For a form with no submissions, go to the index page of your form builder instance and click on 
+        delete to remove the form.
+        </p>
+        
+        <p>
+        <span id="fillform"><strong>How do I fill out a form?</strong></span><br />
+        To fill out a form, visit the index page of your form builder instance and click on the <i>"View/Fill Form"</i> button. You can then fill out and submit the form.
+        </p>
+
+        <p>
+        <span id="excel"><strong>How do I export registration data to excel?</strong></span><br />
+        To export form data to excel, you must have one or more form submissions. From your form's index page, click on <i>"View Submissions"</i> button, then on the 
+        submissions page, click on the "Export All to Excel" button.
+        </p>
+        
+        <p>
+        <span id="faqthemes"><strong>How do I manage themes for my forms?</strong></span><br />
+       To manage themes, create a new directory (eg. "Awesome New Theme") in the <i>"/Content/css/form-builder/themes/"</i> 
+       directory. Then create a new css file in that directory called "styles.css". You can then write css to customize the 
+       look and feel of your forms. You can style each individual form differently.<br />
+       Tip: Use an existing theme's style.css file as a guide to help you create your own
+        </p>
+
+        <p>
+        <span id="emailsetttings"><strong>How do I manage notification email settings?</strong></span><br />
+        You can manage where email notifications are sent to after a user submits an entry to your form.
+        You can determine which email you want form submissions sent to, on a form-by-form basis. To edit the email 
+        address entry-notifications are sent to, click on the title of the form to select it, then in the edit panel, 
+        enter an email address into the notification email box. This will be the address that submissions notifications are 
+        sent to.<br /><br />
+        To edit the smtp settings the application uses to send email, open the <em>/lib/forms-settings.php</em> and edit the smtp config settings to 
+        use your email server's details.
+        </p>
+
+        <p>
+        <span id="managefiles"><strong>How do I manage where the file-upload control stores uploaded files?</strong></span><br />
+        To edit the path that files uploaded using the file-upload control of your forms are stored, first
+        determine where you would like to store uploaded files. You can choose to store uploads either on the Amazon S3 cloud
+        or in your local directories. <br /><br />
+        To store files in your local directories, open the lib/forms-settings.php file and set the "USE_CLOUD_STORAGE" setting to "false".  
+        Then set the "FILE_SAVE_PATH" setting key to any directory you would prefer to store file uploads in (note: you must use a relative path).<br /><br />
+        To store files on the Amazon S3 cloud set the "USE_CLOUD_STORAGE" application setting to "true" and update the 
+        configuration settings for authenticating against the Amazon S3 cloud.                
+        </p>
+		
+		<p>Thank you for purchasing this plugin. As I said at the beginning, I'd be glad to help you if you have any questions relating to this theme. No guarantees, but I'll do my best to assist. If you have a more general question relating to this code on CodeCanyon.net, you might consider visiting the forums and asking your question in the "Item Discussion" section.</p> 
+		
+		<p class="append-bottom alt large"><strong>zeeside</strong></p>
+		<p><a href="#toc">Go To Table of Contents</a></p>
+		
+		<hr class="space">
+	</div><!-- end div .container -->
+</body>
+</html>
